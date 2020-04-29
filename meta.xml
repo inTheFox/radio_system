@@ -1,0 +1,18 @@
+<meta>
+	<info author="inTheFox" version="0.1" description="Radio System" />
+
+	<oop>true</oop>
+	<script src="client/utils.lua" type="client" cache="false" />
+	<script src="client/main.lua" type="client" cache="false" />
+	<script src="client/typing.lua" type="client" cache="false" />
+
+	<script src="client/search.lua" type="client" cache="false"/>
+
+	<!--Files -->
+	<file src="assets/images/panel.png" />
+	<file src="assets/fonts/regular.ttf" />
+	<file src="assets/fonts/sbold.ttf" />
+
+	<file src="assets/pause.png" />
+	<file src="assets/start.png" />
+</meta>
