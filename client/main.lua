@@ -129,11 +129,9 @@ function radioRender()
 			dxDrawRectangle(lineX, ((self.y + self.h) - 47*px), bufferWeight,10*px, tocolor(40,40,40,255))
 			dxDrawRectangle(lineX, ((self.y + self.h) - 47*px), proccesWeight,10*px, tocolor(r,g,b,255))
 		end
-		--local cStart, cEnd = 
-		local playedTime = string.format("%02d:%02d / %02d:%02d",currentPosition/60, currentPosition % 60, length/60, length % 60)
-		--print(playedTime)
-
-		dxDrawText(playedTime, (self.x + 90*px),(self.y + self.h) - 70*px , 10,10,tocolor(255,255,255,255),0.5,self.fonts["header"])
+		
+		local playedTime = string.format("%02d:%02d / %02d:%02d", currentPosition/60, currentPosition % 60, length/60, length % 60)
+		dxDrawText(playedTime, (self.x + 90*px),(self.y + self.h) - 70*px, 10,10,tocolor(255,255,255,255),0.5,self.fonts["header"])
 
 		if isCursor(lineX, ((self.y + self.h) - 47*px),lineWeight, 10*px) then
 			if getKeyState("mouse1") then
@@ -143,7 +141,6 @@ function radioRender()
 				posX = posX/lineWeight
 				local newPosition = posX*length
 				setSoundPosition(self.currentMusicData, newPosition)
-				--print(newPosition)
 			end
 		end
 	end
@@ -174,7 +171,6 @@ addEventHandler("onClientClick",root,function(key, state)
 			setSoundPaused(self.currentMusicData,not isSoundPaused(self.currentMusicData))
 		end
 	end
-	
 end)
 
 function radio.visible(state)
@@ -196,8 +192,6 @@ addEventHandler("onClientKey",root,function(key,state)
 	self.visible(not self.state)
 end)
 
-
-
 addEventHandler("onClientResourceStop",resourceRoot,function()
 	guiSetInputMode("allow_binds")
 end)
@@ -209,7 +203,6 @@ addEventHandler("radio.sendResult", resourceRoot, function(musicTable)
 		v:destroy()
 		textures[k] = nil
 	end
-	--iprint(musicTable)
 	local mTable = {};
 	for k,v in ipairs(musicTable) do
 		table.insert(mTable,{
@@ -219,17 +212,14 @@ addEventHandler("radio.sendResult", resourceRoot, function(musicTable)
 			url = v.url,
 			image = "none",
 		})
-		--outputChatBox(v.artist.." - "..v.title.." ID: "..v.id)
 	end
 	self.traksList = mTable
 end)
 
 addEvent("radio.sendImage",true)
 addEventHandler("radio.sendImage",resourceRoot,function(pixels, id)
-	--print(id)
 	for k,v in ipairs(self.traksList) do
 		local Vid = utf8.sub(v.id, 10)
-		--print(Vid, id)
 		if Vid == id then
 			if textures[Vid] ~= nil then
 				textures[Vid]:destroy()
@@ -244,16 +234,9 @@ end)
 function radio.play(index)
 	if isElement(self.currentMusicData) then
 		stopSound(self.currentMusicData)
-		--self.currentMusicData:destroy()
 	end
 	if self.traksList[index] ~= nil then else return end
 	self.currentMusicData = playSound(self.traksList[index].url)
-	setTimer(function()
-		local length = getSoundLength(self.currentMusicData)
-		local minutes = length/60
-		--print(minutes)
-		--print(getSoundLength(self.currentMusicData))
-	end, 2000,1)
 end
 
 addEventHandler("onClientKey",root,function(key,state)
@@ -267,10 +250,8 @@ addEventHandler("onClientKey",root,function(key,state)
 		if (#self.traksList - 5) > 0 then
 			if scroll < (#self.traksList - 5) then
 				scroll = scroll + 1
-			--	print(scroll)
 			end
 		end
 	end
 end)
 
---getSoundPosition
