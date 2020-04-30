@@ -1,16 +1,16 @@
 addEventHandler("onClientCharacter", root, function(symbol)
-	if self.state then else return end
+	if not self.state then return end
 	if not self.typing then return end
-	if dxGetTextWidth(self.edit..""..symbol, 0.5, self.fonts["editbox"]) < radio.editWeight then
-		self.edit = self.edit..""..symbol
-		RadioGetResult(self.edit)
+	if dxGetTextWidth(self.edit..symbol, 0.5, self.fonts["editbox"]) < self.editWeight then
+		self.edit = self.edit..symbol
+		self.searchTracks(self.edit)
 	end
 end)
 
 local backspaceTimer
 local subTimer
 addEventHandler("onClientKey", root, function(key, state)
-	if self.state then else return end
+	if not self.state then return end
 	if not self.typing then return end
 	if key == "backspace" then
 		if state then
