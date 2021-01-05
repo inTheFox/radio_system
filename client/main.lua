@@ -1,3 +1,5 @@
+// HELLO, WORLD;
+
 --Main.lua
 radio = {};
 self = radio
